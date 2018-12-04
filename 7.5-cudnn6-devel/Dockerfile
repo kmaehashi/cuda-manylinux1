@@ -1,4 +1,7 @@
+# FROM centos:6
 FROM quay.io/pypa/manylinux1_x86_64
+
+USER root
 
 ###
 ### https://gitlab.com/nvidia/cuda/raw/centos6/7.5/runtime/Dockerfile
@@ -72,7 +75,7 @@ RUN mkdir /tmp/gpu-deployment-kit && cd /tmp/gpu-deployment-kit && \
     rm -rf /tmp/gpu-deployment-kit* && \
     rm -rf /var/cache/yum/*
 
-ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs:${LIBRARY_PATH}
+ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs
 
 ###
 ### https://gitlab.com/nvidia/cuda/raw/centos6/7.5/devel/cudnn6/Dockerfile

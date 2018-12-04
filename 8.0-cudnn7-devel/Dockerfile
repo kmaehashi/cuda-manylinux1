@@ -1,4 +1,7 @@
+# FROM centos:6
 FROM quay.io/pypa/manylinux1_x86_64
+
+USER root
 
 ###
 ### https://gitlab.com/nvidia/cuda/raw/centos6/8.0/runtime/Dockerfile
@@ -63,19 +66,19 @@ RUN yum install -y \
         cuda-driver-dev-$CUDA_PKG_VERSION && \
     rm -rf /var/cache/yum/*
 
-ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs:${LIBRARY_PATH}
+ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs
 
 ###
 ### https://gitlab.com/nvidia/cuda/raw/centos6/8.0/devel/cudnn7/Dockerfile
 ###
 
-ENV CUDNN_VERSION 7.0.5.15
+ENV CUDNN_VERSION 7.1.2.21
 LABEL com.nvidia.cudnn.version="${CUDNN_VERSION}"
 
 # cuDNN license: https://developer.nvidia.com/cudnn/license_agreement
-RUN CUDNN_DOWNLOAD_SUM=9e0b31735918fe33a79c4b3e612143d33f48f61c095a3b993023cdab46f6d66e && \
-    curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v7.0.5/cudnn-8.0-linux-x64-v7.tgz -O && \
-    echo "$CUDNN_DOWNLOAD_SUM  cudnn-8.0-linux-x64-v7.tgz" | sha256sum -c - && \
-    tar --no-same-owner -xzf cudnn-8.0-linux-x64-v7.tgz -C /usr/local && \
-    rm cudnn-8.0-linux-x64-v7.tgz && \
+RUN CUDNN_DOWNLOAD_SUM=a5dfd656811fe9c43d87c40338cec5e1a85ad5a9cd3b5f1e95dd67d5e126aacc && \
+    curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v7.1.2/cudnn-8.0-linux-x64-v7.1.tgz -O && \
+    echo "$CUDNN_DOWNLOAD_SUM  cudnn-8.0-linux-x64-v7.1.tgz" | sha256sum -c - && \
+    tar --no-same-owner -xzf cudnn-8.0-linux-x64-v7.1.tgz -C /usr/local && \
+    rm cudnn-8.0-linux-x64-v7.1.tgz && \
     ldconfig
