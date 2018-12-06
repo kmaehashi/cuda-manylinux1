@@ -15,8 +15,9 @@ echo "${CUDA_CUDNN}" | while read CUDA CUDNN; do
   TAG="${CUDA}-cudnn${CUDNN}-devel"
   pushd "${TAG}"
   if [ "${CUDA}" != "7.0" ]; then
-    ../generate.py --os centos6 --cuda "${CUDA}" --cudnn "${CUDNN}" --variant devel --base quay.io/pypa/manylinux1_x86_64
+    python ../generate.py --os centos6 --cuda "${CUDA}" --cudnn "${CUDNN}" --variant devel --base quay.io/pypa/manylinux1_x86_64
   fi
   docker build -t "cuda-manylinux1:${TAG}" .
   popd
 done
+rm generate.py
