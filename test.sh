@@ -12,6 +12,7 @@ CUDA_CUDNN="\
 
 curl -o generate.py "https://raw.githubusercontent.com/kmaehashi/cuda-docker-generator/master/generate.py"
 echo "${CUDA_CUDNN}" | while read CUDA CUDNN; do
+  [ "${CUDA}" = "" ] && break
   TAG="${CUDA}-cudnn${CUDNN}-devel"
   pushd "${TAG}"
   if [ "${CUDA}" != "7.0" ]; then
