@@ -1,9 +1,11 @@
+# FROM centos:6
 FROM quay.io/pypa/manylinux1_x86_64
 
 USER root
 
 ###
-### Runtime: hand-written based on `7.5-cudnn6-devel`
+### Modified based on:
+### https://gitlab.com/nvidia/cuda/raw/centos6/7.5/runtime/Dockerfile
 ###
 
 RUN NVIDIA_GPGKEY_SUM=d1be581509378368edeec8c1eb2958702feedf3bc3d17011adbf24efacce4ab5 && \
@@ -46,7 +48,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 ENV NVIDIA_REQUIRE_CUDA "cuda>=7.0"
 
 ###
-### Devel: hand-written based on `7.5-cudnn6-devel`
+### Modified based on:
+### https://gitlab.com/nvidia/cuda/raw/centos6/7.5/devel/Dockerfile
 ###
 
 RUN yum install -y \
@@ -77,7 +80,8 @@ RUN mkdir /tmp/gpu-deployment-kit && cd /tmp/gpu-deployment-kit && \
 ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs
 
 ###
-### cuDNN: hand-written based on `7.5-cudnn6-devel`
+### Modified based on:
+### https://gitlab.com/nvidia/cuda/raw/centos6/7.5/devel/cudnn5/Dockerfile
 ###
 
 ENV CUDNN_VERSION 4.0.8
